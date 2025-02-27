@@ -2,14 +2,18 @@
 //#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 
 #include "bits/stdc++.h"
+using namespace std;
+
+//#include "ext/pb_ds/assoc_container.hpp"
+//using namespace __gnu_pbds;
+//template <class T>
+//using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 #define ll long long
 #define pb push_back
 #define all(a) (a).begin(), (a).end()
 #define vi vector<int>
 #define vll vector<long long>
-
-using namespace std;
 
 void setIO(string name = ""){
     cin.tie(0)->sync_with_stdio(0);
@@ -44,7 +48,7 @@ public:
             k += k & -k; // LSB
         }
     }
-    int sum (int k) {
+    int sum(int k){
         int s = 0;
         while (k >= 1){
             s += tree[k];
@@ -83,9 +87,9 @@ public:
 
 template <typename T>
 struct SegTree { // cmb(ID,b) = b
-    const T ID{}; T cmb(T a, T b) { return (a&b); }
+    const T ID{}; T cmb(T a, T b) { return (a+b); }
     int n; vector<T> seg;
-    void init(int _n) { // upd, query also work if n = _n
+    void i(int _n) { // upd, query also work if n = _n
         for (n = 1; n < _n; ) n *= 2;
         seg.assign(2*n,ID); }
     void pull(int p) { seg[p] = cmb(seg[2*p],seg[2*p+1]); }
@@ -101,6 +105,11 @@ struct SegTree { // cmb(ID,b) = b
     }
 };
 
+template<typename T>
+T gcd(T a, T b){ return (__gcd(a, b)); }
+template<typename T>
+T lcm(T a, T b){ return (a*b)/(__gcd(a, b)); }
+
 ll modPow(ll a, ll b, ll m) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a) % m; a = (a * a) % m; b = b >> 1;} return res;}
 ll modInv(ll x, ll m) {return modPow(x, m-2, m);}
 bool isPrime(ll n) { if(n < 2) return false; for(ll k = 2; k * k <= n; k++) if(n % k == 0) return false; return true; }
@@ -109,9 +118,12 @@ ll binom(ll N, ll K, ll MOD, vector<ll> &factorial){
     return (factorial[N] * (modInv(factorial[K], MOD)%MOD * modInv(factorial[N-K], MOD)%MOD)%MOD)%MOD;
 }
 
-const ll MOD = 998244353;
+const ll MOD = 1e9+7;
 const ll INF = 1e16; // INT64_MAX ~ 1.84e19
 const int MAXN = 3e5+5;
+
+const ll mxh = 1003;
+
 
 void solve() {
 
