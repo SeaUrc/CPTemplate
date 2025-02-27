@@ -122,9 +122,6 @@ const ll MOD = 1e9+7;
 const ll INF = 1e16; // INT64_MAX ~ 1.84e19
 const int MAXN = 3e5+5;
 
-const ll mxh = 1003;
-
-
 void solve() {
 
 }
